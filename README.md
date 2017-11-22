@@ -17,4 +17,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 * Hat tip to my dog Samson for welcoming me when I get home after a long day of coding.
 * Georgia Tech Coding Bootcamp Instructors and TAs
-* The delicious Thanks Giving food that got me through this week 
+* The delicious Thanksgiving food that got me through this week 
