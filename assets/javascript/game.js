@@ -11,7 +11,7 @@ $(document).ready(function () {
     /*Global vars
      *********************************************************/
     var userCharacter;
-    var userSeleted = false;
+    var userSelected = false;
 
     var characters = [{
             name: "Obi Wan Kenobi",
@@ -23,7 +23,6 @@ $(document).ready(function () {
         {
             name: "Yoda",
             id: "yoda",
-
             hp: 120,
             attack: 15
         },
@@ -47,8 +46,8 @@ $(document).ready(function () {
      ******************************************************/
     //display characters on screen
     function displayCharacters() {
-        //if userSeected is off
-        if (!userSeleted) {
+        //if userSelected is off
+        if (!userSelected) {
             for (i = 0; i < characters.length; i++) {
                 $("#characters").append(
                     "<div id='" + characters[i].id + "'class='box choose-char'>" +
@@ -66,12 +65,13 @@ $(document).ready(function () {
         $('.box').click(function (event) {
             userCharacter = $(this).attr('id');
             console.log('user is: ' + userCharacter);
-            userSeleted = true;
+            userSelected = true;
             //hide fighters
             $('.choose-char').hide();
             //show user fighter
             showUserFighter()
-            //show enemanies
+            //show enemies
+            showEnemies();
         });
     }
 
@@ -81,17 +81,35 @@ $(document).ready(function () {
             if (index.id === userCharacter) {
                 userCharacter = index;
                 $('.your-character').append(userCharacter.name);
-
             }
         });
 
         console.log(userCharacter);
     }
 
+    //show enemies 
+    function showEnemies(){
+        $('#enemies').append('<h3>Enemies Available to Attack</h3>');
+        
+        //loop through arr
+        //if userCharacter id != arr index show enemy
+        for(i=0; i<characters.length; i++){
+            if(characters[i].id !== userCharacter.id){
+                $("#enemies").append(
+                    "<div id='" + characters[i].id + "'class='box choose-char'>" +
+                    characters[i].name +
+                    "<div class='hp'>" + characters[i].hp + "</div></div>"
+                );
+            }
+        }
+
+        
+    }
+
     //start game
     function startGame() {
         //reset vars
-        userSeleted = false;
+        userSelected = false;
 
         //run code
         displayCharacters();
