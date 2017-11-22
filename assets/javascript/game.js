@@ -10,7 +10,8 @@ $(document).ready(function () {
 
     /*Global vars
      *********************************************************/
-    var userChar;
+    var userCharacter;
+    var userSeleted = false;
 
     var characters = [{
             name: "Obi Wan Kenobi",
@@ -46,27 +47,53 @@ $(document).ready(function () {
      ******************************************************/
     //display characters on screen
     function displayCharacters() {
-        console.log(characters.length);
-        for (i = 0; i < characters.length; i++) {
-            $("#characters").append(
-                "<div id='" + characters[i].id + "'class='box'>" + characters[i].name + "</div>"
-            );
+        //if userSeected is off
+        if (!userSeleted) {
+            for (i = 0; i < characters.length; i++) {
+                $("#characters").append(
+                    "<div id='" + characters[i].id + "'class='box choose-char'>" +
+                    characters[i].name +
+                    "<div class='hp'>" + characters[i].hp + "</div></div>"
+                );
+            }
         }
 
-        getUsercharacter();
+        getUserCharacter();
     }
 
     //get user character
-    function getUsercharacter() {
+    function getUserCharacter() {
         $('.box').click(function (event) {
-            userChar = $(this).attr('id');
-            console.log('user is: ' + userChar);
-
+            userCharacter = $(this).attr('id');
+            console.log('user is: ' + userCharacter);
+            userSeleted = true;
+            //hide fighters
+            $('.choose-char').hide();
+            //show user fighter
+            showUserFighter()
+            //show enemanies
         });
+    }
+
+    //show user fighter character function
+    function showUserFighter() {
+        characters.forEach(function (index) {
+            if (index.id === userCharacter) {
+                userCharacter = index;
+                $('.your-character').append(userCharacter.name);
+
+            }
+        });
+
+        console.log(userCharacter);
     }
 
     //start game
     function startGame() {
+        //reset vars
+        userSeleted = false;
+
+        //run code
         displayCharacters();
 
     }
