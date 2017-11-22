@@ -1,0 +1,11 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    /* background: #E0D6B3;
+    color: #fff; */
+    font-family: 'Open-sans', sans-serif;
+}
