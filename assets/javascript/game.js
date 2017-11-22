@@ -14,23 +14,28 @@ $(document).ready(function () {
 
     var characters = [{
             name: "Obi Wan Kenobi",
+            id: "obi",
             hp: 100,
             attack: 10
         },
 
         {
             name: "Yoda",
+            id: "yoda",
+
             hp: 120,
             attack: 15
         },
 
         {
             name: "Darth Vader",
+            id: "vader",
             hp: 150,
             attack: 20
         },
         {
-            name: "Deathstar",
+            name: "Death Star",
+            id: "deathStar",
             hp: 190,
             attack: 25
         }
@@ -43,13 +48,32 @@ $(document).ready(function () {
     function displayCharacters() {
         console.log(characters.length);
         for (i = 0; i < characters.length; i++) {
-            $("#characters").append(characters[i].name);
+            $("#characters").append(
+                "<div id='" + characters[i].id + "'class='box'>" + characters[i].name + "</div>"
+            );
         }
+
+        getUsercharacter();
+    }
+
+    //get user character
+    function getUsercharacter() {
+        $('.box').click(function (event) {
+            userChar = $(this).attr('id');
+            console.log('user is: ' + userChar);
+
+        });
+    }
+
+    //start game
+    function startGame() {
+        displayCharacters();
+
     }
 
     /*Running code
      ******************************/
-    displayCharacters();
+    startGame();
 
 
 });
