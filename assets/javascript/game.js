@@ -83,7 +83,10 @@ $(document).ready(function () {
             if (index.id === userCharacter) {
                 userCharacter = index;
                 $('.your-character').append(
-                 "<div id='user'>" + userCharacter.name + "</div>"
+                    "<div id='user'>" +
+                    userCharacter.name +
+
+                    "<div id='userHp'>" + userCharacter.hp + "</div></div></div>"
                 );
             }
         });
@@ -115,38 +118,90 @@ $(document).ready(function () {
         $('.enemy').click(function (event) {
 
             if (!defenderSelected) {
-                defenderSelected = true;                
+                defenderSelected = true;
                 defender = $(this).attr('id');
                 console.log('Defender is: ' + defender);
                 //hide enemy
                 $(this).hide();
                 //show defender
-                showDefender();
+                showDefender(defender);
             }
 
         });
     }
 
     //show defender
-    function showDefender() {
+    function showDefender(defender) {
+        console.log('*************************');
+        console.log('showDefender();');
+        console.log('*************************');
+
         characters.forEach(function (index) {
             if (index.id === defender) {
                 defender = index;
                 $('#defender').append(
-                    "<div id='selected-enemy'>"+defender.name+"</div>");
+                    "<div id='selected-enemy'>" +
+                    defender.name +
+                    "<div id='enemyHp'> Defender Hp:" + defender.hp + "</div></div>"
+                );
             }
         });
         console.log(defender);
-        
+
+        //attack button
+        attack(userCharacter, defender);
+
+    }
+
+    //attack
+    function attack(userCharacter, defender) {
+        var userHp = userCharacter.hp;
+        var defenderHp = defender.hp;
+        var defenderAttack = defender.attack;
+
+        userCharacter.attack = 0;
+
+
+        $('#attack').on('click', function () {
+            if (userSelected && defenderSelected) {
+
+                userCharacter.attack += 8;
+                defenderHp -= userCharacter.attack;
+                userCharacter.hp -= defenderAttack;
+
+                console.log('Attack button clicked');
+                console.log('User character: ' + userCharacter.name);
+                console.log('User hp: ' + userCharacter.hp);
+                console.log('User attack: ' + userCharacter.attack)
+                console.log('Defender: ' + defender.name);
+                console.log('Defender attack: ' + defender.attack);
+                console.log('Defender hp: ' + defender.hp);
+                console.log('********************************************');
+
+                $('#userHp').text(userCharacter.hp);
+                $('#enemyHp').text(defenderHp);
+
+                if (defenderHp <= 0) {
+                    $('#selected-enemy').hide();
+                    defenderSelected = false;
+                    getDefender();
+
+                }
+
+
+            }
+        });
     }
 
     //start game
     function startGame() {
         //reset vars
         userSelected = false;
+        defenderSelected = false;
 
         //run code
         displayCharacters();
+
 
     }
 
