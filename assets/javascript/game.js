@@ -82,7 +82,9 @@ $(document).ready(function () {
         characters.forEach(function (index) {
             if (index.id === userCharacter) {
                 userCharacter = index;
-                $('.your-character').append(userCharacter.name);
+                $('.your-character').append(
+                 "<div id='user'>" + userCharacter.name + "</div>"
+                );
             }
         });
 
@@ -130,7 +132,8 @@ $(document).ready(function () {
         characters.forEach(function (index) {
             if (index.id === defender) {
                 defender = index;
-                $('#defender').append(defender.name);
+                $('#defender').append(
+                    "<div id='selected-enemy'>"+defender.name+"</div>");
             }
         });
         console.log(defender);
