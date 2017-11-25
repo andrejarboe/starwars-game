@@ -11,7 +11,9 @@ $(document).ready(function () {
     /*Global vars
      *********************************************************/
     var userCharacter;
+    var defender;
     var userSelected = false;
+    var defenderSelected = false;
 
     var characters = [{
             name: "Obi Wan Kenobi",
@@ -69,7 +71,7 @@ $(document).ready(function () {
             //hide fighters
             $('.choose-char').hide();
             //show user fighter
-            showUserFighter()
+            showUserFighter();
             //show enemies
             showEnemies();
         });
@@ -80,7 +82,9 @@ $(document).ready(function () {
         characters.forEach(function (index) {
             if (index.id === userCharacter) {
                 userCharacter = index;
-                $('.your-character').append(userCharacter.name);
+                $('.your-character').append(
+                 "<div id='user'>" + userCharacter.name + "</div>"
+                );
             }
         });
 
@@ -88,21 +92,51 @@ $(document).ready(function () {
     }
 
     //show enemies 
-    function showEnemies(){
+    function showEnemies() {
         $('#enemies').append('<h3>Enemies Available to Attack</h3>');
-        
+
         //loop through arr
         //if userCharacter id != arr index show enemy
-        for(i=0; i<characters.length; i++){
-            if(characters[i].id !== userCharacter.id){
+        for (i = 0; i < characters.length; i++) {
+            if (characters[i].id !== userCharacter.id) {
                 $("#enemies").append(
-                    "<div id='" + characters[i].id + "'class='box choose-char'>" +
+                    "<div id='" + characters[i].id + "'class='box enemy'>" +
                     characters[i].name +
                     "<div class='hp'>" + characters[i].hp + "</div></div>"
                 );
             }
         }
 
+        getDefender();
+    }
+
+    //get defender
+    function getDefender() {
+        $('.enemy').click(function (event) {
+
+            if (!defenderSelected) {
+                defenderSelected = true;                
+                defender = $(this).attr('id');
+                console.log('Defender is: ' + defender);
+                //hide enemy
+                $(this).hide();
+                //show defender
+                showDefender();
+            }
+
+        });
+    }
+
+    //show defender
+    function showDefender() {
+        characters.forEach(function (index) {
+            if (index.id === defender) {
+                defender = index;
+                $('#defender').append(
+                    "<div id='selected-enemy'>"+defender.name+"</div>");
+            }
+        });
+        console.log(defender);
         
     }
 
