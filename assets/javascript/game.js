@@ -20,7 +20,7 @@ $(document).ready(function () {
             id: "obi",
             hp: 100,
             attack: 10,
-            img: "../images/obiWan.jpg"
+            img: "./assets/images/obiWan.jpg"
         },
 
         {
@@ -28,7 +28,7 @@ $(document).ready(function () {
             id: "yoda",
             hp: 120,
             attack: 15,
-            img: "../images/obiWan.jpg"
+            img: "./assets/images/yoda.jpg"
         },
 
         {
@@ -36,21 +36,22 @@ $(document).ready(function () {
             id: "vader",
             hp: 150,
             attack: 20,
-            img: "../images/obiWan.jpg"
+            img: "./assets/images/obiWan.jpg"
+
         },
         {
             name: "Death Star",
             id: "deathStar",
             hp: 190,
             attack: 25,
-            img: "../images/obiWan.jpg"
+            img: "./assets/images/obiWan.jpg"
         },
         {
             name: "jar jar",
             id: "jar",
             hp: 50,
             attack: 5,
-            img: "../images/obiWan.jpg"
+            img: "./assets/images/obiWan.jpg"
         }
 
     ]
@@ -65,7 +66,7 @@ $(document).ready(function () {
                 $("#characters").append(
                     "<div id='" + characters[i].id + "'class='box choose-char'>" +
                     characters[i].name +
-                    // "<img .src='"+character[i].img+"/>"+
+                    "<img src='" + characters[i].img + "'/>" +
                     "<div class='hp'>" + characters[i].hp + "</div></div>"
                 );
             }
@@ -81,7 +82,7 @@ $(document).ready(function () {
             console.log('user is: ' + userCharacter);
             userSelected = true;
             //hide fighters
-            $('.choose-char').hide();
+            $('#characters').hide();
             //show user fighter
             showUserFighter();
             //show enemies
@@ -173,44 +174,18 @@ $(document).ready(function () {
 
     //attack
     function attack(userCharacter, defender) {
-        // var defender = defender;
-        // defender = $('#defender').attr('id');
-
-        // characters.forEach(function(index){
-        //     if (index.id === defender){
-        //         defender = index;
-        //     }
-        // });
-
 
         var userHp = userCharacter.hp;
         var defenderHp = defender.hp;
         var defenderAttack = defender.attack;
-
-
-        // console.log('********************************************');
-        // console.log('********************************************');
-        // console.log('************Before click********************');
-        // console.log('********************************************');
-        // console.log('********************************************');
-
-        // console.log('Attack button clicked');
-        // console.log('User character: ' + userCharacter.name);
-        // console.log('User hp: ' + userCharacter.hp);
-        // console.log('User attack: ' + userCharacter.attack)
-        // console.log('Defender: ' + defender.name);
-        // console.log('Defender attack: ' + defender.attack);
-        // console.log('Defender hp: ' + defender.hp);
-        // console.log('********************************************');
-
 
         $('#attack').on('click', function () {
             console.log('*******************************');
             console.log('Attack defender' + defender.name);
             console.log('*******************************');
             console.log('defender Selected value <= 0 ::::: ' + defenderSelected);
-            console.log('defender hp: ' +defenderHp);
-            
+            console.log('defender hp: ' + defenderHp);
+
             if (userSelected && defenderSelected) {
 
                 userCharacter.attack += 8;
@@ -231,8 +206,12 @@ $(document).ready(function () {
 
             }
 
-            if (defenderHp <= 0) {
-                
+            if (userCharacter.hp <= 0) {
+                alert('you loose!');
+                location.reload();   
+
+            } else if (defenderHp <= 0) {
+
                 console.log('defender Selected value <= 0 ::::: ' + defenderSelected);
 
                 $('#selected-enemy').remove();
@@ -245,37 +224,6 @@ $(document).ready(function () {
 
 
 
-
-
-        //     if (userSelected && defenderSelected) {
-        //         console.log('defender Selected value::::: ' + defenderSelected);
-        //         var userHp = userCharacter.hp;
-        //         var defenderHp = defender.hp;
-        //         var defenderAttack = defender.attack;
-
-        //         $('#attack').on('click', function () {
-        //             userCharacter.attack += 8;
-        //             console.log('user attack points: ' + userCharacter.attack);
-        //             defenderHp -= userCharacter.attack;
-        //             userCharacter.hp -= defenderAttack;
-
-        //             $('#userHp').text(userCharacter.hp);
-        //             $('#enemyHp').text(defenderHp);
-
-        //             if (defenderHp <= 0) {
-        //                 console.log('defender Selected value <= 0 ::::: ' + defenderSelected);
-
-        //                 $('#selected-enemy').remove();
-        //                 defenderSelected = false;
-        //                 getDefender();
-
-        //             }
-
-        //             console.log('Defender ID: ' + defender.id);
-
-        //         });
-
-        //     }
     }
 
     //start game
@@ -287,8 +235,6 @@ $(document).ready(function () {
 
         //run code
         displayCharacters();
-
-
 
 
     }
