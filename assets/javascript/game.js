@@ -36,7 +36,7 @@ $(document).ready(function () {
             id: "vader",
             hp: 150,
             attack: 20,
-            img: "./assets/images/obiWan.jpg"
+            img: "./assets/images/darthVader.jpg"
 
         },
         {
@@ -44,15 +44,15 @@ $(document).ready(function () {
             id: "deathStar",
             hp: 190,
             attack: 25,
-            img: "./assets/images/obiWan.jpg"
+            img: "./assets/images/deathStar.jpg"
         },
-        {
-            name: "jar jar",
-            id: "jar",
-            hp: 50,
-            attack: 5,
-            img: "./assets/images/obiWan.jpg"
-        }
+        // {
+        //     name: "jar jar",
+        //     id: "jar",
+        //     hp: 50,
+        //     attack: 5,
+        //     img: "./assets/images/obiWan.jpg"
+        // }
 
     ]
 
