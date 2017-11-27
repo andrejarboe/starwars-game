@@ -204,15 +204,20 @@ $(document).ready(function () {
                 $('#userHp').text(userCharacter.hp);
                 $('#enemyHp').text(defenderHp);
 
+                $('#user-text').text('You attacked ' + defender.name + ' for ' + userCharacter.attack + ' damage.');
+                $('#com-text').text(defender.name + ' attacked you for ' + defender.attack + ' damage.');
+
             }
 
             if (userCharacter.hp <= 0) {
                 alert('you loose!');
-                location.reload();   
-
+                $('.container').append('<button id="restart" type="button">Restart</button>');
+                restart();
             } else if (defenderHp <= 0) {
 
                 console.log('defender Selected value <= 0 ::::: ' + defenderSelected);
+
+                $('#com-text').append('You have defeated ' + defender.name + '. You can choose another character to attack.');
 
                 $('#selected-enemy').remove();
                 defenderSelected = false;
@@ -224,6 +229,12 @@ $(document).ready(function () {
 
 
 
+    }
+
+    function restart() {
+        $('#restart').on('click', function () {
+            location.reload();
+        });
     }
 
     //start game
