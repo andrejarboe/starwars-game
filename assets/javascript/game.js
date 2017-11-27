@@ -19,27 +19,38 @@ $(document).ready(function () {
             name: "Obi Wan Kenobi",
             id: "obi",
             hp: 100,
-            attack: 10
+            attack: 10,
+            img: "../images/obiWan.jpg"
         },
 
         {
             name: "Yoda",
             id: "yoda",
             hp: 120,
-            attack: 15
+            attack: 15,
+            img: "../images/obiWan.jpg"
         },
 
         {
             name: "Darth Vader",
             id: "vader",
             hp: 150,
-            attack: 20
+            attack: 20,
+            img: "../images/obiWan.jpg"
         },
         {
             name: "Death Star",
             id: "deathStar",
             hp: 190,
-            attack: 25
+            attack: 25,
+            img: "../images/obiWan.jpg"
+        },
+        {
+            name: "jar jar",
+            id: "jar",
+            hp: 50,
+            attack: 5,
+            img: "../images/obiWan.jpg"
         }
 
     ]
@@ -54,6 +65,7 @@ $(document).ready(function () {
                 $("#characters").append(
                     "<div id='" + characters[i].id + "'class='box choose-char'>" +
                     characters[i].name +
+                    // "<img .src='"+character[i].img+"/>"+
                     "<div class='hp'>" + characters[i].hp + "</div></div>"
                 );
             }
@@ -110,6 +122,9 @@ $(document).ready(function () {
             }
         }
 
+        userCharacter.attack = 0;
+
+
         getDefender();
     }
 
@@ -132,8 +147,10 @@ $(document).ready(function () {
 
     //show defender
     function showDefender(defender) {
+
         console.log('*************************');
         console.log('showDefender();');
+        console.log('Defender var is: ' + defender);
         console.log('*************************');
 
         characters.forEach(function (index) {
@@ -146,23 +163,54 @@ $(document).ready(function () {
                 );
             }
         });
-        console.log(defender);
+        console.log('show defender' + defender.name);
 
         //attack button
         attack(userCharacter, defender);
+
 
     }
 
     //attack
     function attack(userCharacter, defender) {
+        // var defender = defender;
+        // defender = $('#defender').attr('id');
+
+        // characters.forEach(function(index){
+        //     if (index.id === defender){
+        //         defender = index;
+        //     }
+        // });
+
+
         var userHp = userCharacter.hp;
         var defenderHp = defender.hp;
         var defenderAttack = defender.attack;
 
-        userCharacter.attack = 0;
+
+        // console.log('********************************************');
+        // console.log('********************************************');
+        // console.log('************Before click********************');
+        // console.log('********************************************');
+        // console.log('********************************************');
+
+        // console.log('Attack button clicked');
+        // console.log('User character: ' + userCharacter.name);
+        // console.log('User hp: ' + userCharacter.hp);
+        // console.log('User attack: ' + userCharacter.attack)
+        // console.log('Defender: ' + defender.name);
+        // console.log('Defender attack: ' + defender.attack);
+        // console.log('Defender hp: ' + defender.hp);
+        // console.log('********************************************');
 
 
         $('#attack').on('click', function () {
+            console.log('*******************************');
+            console.log('Attack defender' + defender.name);
+            console.log('*******************************');
+            console.log('defender Selected value <= 0 ::::: ' + defenderSelected);
+            console.log('defender hp: ' +defenderHp);
+            
             if (userSelected && defenderSelected) {
 
                 userCharacter.attack += 8;
@@ -181,16 +229,53 @@ $(document).ready(function () {
                 $('#userHp').text(userCharacter.hp);
                 $('#enemyHp').text(defenderHp);
 
-                if (defenderHp <= 0) {
-                    $('#selected-enemy').hide();
-                    defenderSelected = false;
-                    getDefender();
+            }
 
-                }
+            if (defenderHp <= 0) {
+                
+                console.log('defender Selected value <= 0 ::::: ' + defenderSelected);
 
+                $('#selected-enemy').remove();
+                defenderSelected = false;
+                getDefender();
+                defenderHp = defender.hp;
 
             }
         });
+
+
+
+
+
+        //     if (userSelected && defenderSelected) {
+        //         console.log('defender Selected value::::: ' + defenderSelected);
+        //         var userHp = userCharacter.hp;
+        //         var defenderHp = defender.hp;
+        //         var defenderAttack = defender.attack;
+
+        //         $('#attack').on('click', function () {
+        //             userCharacter.attack += 8;
+        //             console.log('user attack points: ' + userCharacter.attack);
+        //             defenderHp -= userCharacter.attack;
+        //             userCharacter.hp -= defenderAttack;
+
+        //             $('#userHp').text(userCharacter.hp);
+        //             $('#enemyHp').text(defenderHp);
+
+        //             if (defenderHp <= 0) {
+        //                 console.log('defender Selected value <= 0 ::::: ' + defenderSelected);
+
+        //                 $('#selected-enemy').remove();
+        //                 defenderSelected = false;
+        //                 getDefender();
+
+        //             }
+
+        //             console.log('Defender ID: ' + defender.id);
+
+        //         });
+
+        //     }
     }
 
     //start game
@@ -199,8 +284,11 @@ $(document).ready(function () {
         userSelected = false;
         defenderSelected = false;
 
+
         //run code
         displayCharacters();
+
+
 
 
     }
