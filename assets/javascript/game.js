@@ -45,7 +45,7 @@ $(document).ready(function () {
             hp: 190,
             attack: 25,
             img: "./assets/images/deathStar.jpg"
-        },
+        }
         // {
         //     name: "jar jar",
         //     id: "jar",
@@ -63,10 +63,10 @@ $(document).ready(function () {
         //if userSelected is off
         if (!userSelected) {
             for (i = 0; i < characters.length; i++) {
-                $("#characters").append(
-                    "<div id='" + characters[i].id + "'class='box choose-char'>" +
+                $("#displayCharacters").append(
+                    "<div id='" + characters[i].id + "'class='box character-select col-xs-3 col-sm-3 col-md-3 '>" +
                     characters[i].name +
-                    "<img src='" + characters[i].img + "'/>" +
+                    "<img class='img-responsive img-circle' src='" + characters[i].img + "'/>" +
                     "<div class='hp'>" + characters[i].hp + "</div></div>"
                 );
             }
@@ -83,6 +83,7 @@ $(document).ready(function () {
             userSelected = true;
             //hide fighters
             $('#characters').hide();
+            $('.title').hide();
             //show user fighter
             showUserFighter();
             //show enemies
@@ -99,7 +100,7 @@ $(document).ready(function () {
                     "<div id='user'>" +
                     userCharacter.name +
 
-                    "<div id='userHp'>" + userCharacter.hp + "</div></div></div>"
+                    "<img class='img-responsive img-circle col-xs-3 col-sm-3 col-md-3' src='" + userCharacter.img + "'/><div id='userHp'>" + userCharacter.hp + "</div></div></div>"
                 );
             }
         });
@@ -109,16 +110,16 @@ $(document).ready(function () {
 
     //show enemies 
     function showEnemies() {
-        $('#enemies').append('<h3>Enemies Available to Attack</h3>');
+        $('#enemies').append('<h2>Enemies Available to Attack</h2>');
 
         //loop through arr
         //if userCharacter id != arr index show enemy
         for (i = 0; i < characters.length; i++) {
             if (characters[i].id !== userCharacter.id) {
                 $("#enemies").append(
-                    "<div id='" + characters[i].id + "'class='box enemy'>" +
+                    "<div id='" + characters[i].id + "'class='box enemy col-xs-6 col-sm-3 col-md-3'>" +
                     characters[i].name +
-                    "<div class='hp'>" + characters[i].hp + "</div></div>"
+                    "<img class='img-responsive img-circle' src='" + characters[i].img + "'/><div class='hp'>" + characters[i].hp + "</div></div>"
                 );
             }
         }
@@ -160,7 +161,7 @@ $(document).ready(function () {
                 $('#defender').append(
                     "<div id='selected-enemy'>" +
                     defender.name +
-                    "<div id='enemyHp'> Defender Hp:" + defender.hp + "</div></div>"
+                    "<img class='img-responsive img-circle col-xs-3 col-sm-3 col-md-3' src='" + defender.img + "'/><div id='enemyHp'> Defender Hp:" + defender.hp + "</div></div>"
                 );
             }
         });
@@ -204,15 +205,20 @@ $(document).ready(function () {
                 $('#userHp').text(userCharacter.hp);
                 $('#enemyHp').text(defenderHp);
 
+                $('#user-text').text('You attacked ' + defender.name + ' for ' + userCharacter.attack + ' damage.');
+                $('#com-text').text(defender.name + ' attacked you for ' + defender.attack + ' damage.');
+
             }
 
             if (userCharacter.hp <= 0) {
                 alert('you loose!');
-                location.reload();   
-
+                $('#game').append('<button id="restart" type="button">Restart</button>');
+                restart();
             } else if (defenderHp <= 0) {
 
                 console.log('defender Selected value <= 0 ::::: ' + defenderSelected);
+
+                $('#com-text').append('You have defeated ' + defender.name + '. You can choose another character to attack.');
 
                 $('#selected-enemy').remove();
                 defenderSelected = false;
@@ -224,6 +230,12 @@ $(document).ready(function () {
 
 
 
+    }
+
+    function restart() {
+        $('#restart').on('click', function () {
+            location.reload();
+        });
     }
 
     //start game
