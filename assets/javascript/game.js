@@ -79,7 +79,6 @@ $(document).ready(function () {
     function getUserCharacter() {
         $('.box').click(function (event) {
             userCharacter = $(this).attr('id');
-            console.log('user is: ' + userCharacter);
             userSelected = true;
             //hide fighters
             $('#characters').hide();
@@ -117,7 +116,7 @@ $(document).ready(function () {
         for (i = 0; i < characters.length; i++) {
             if (characters[i].id !== userCharacter.id) {
                 $("#enemies").append(
-                    "<div id='" + characters[i].id + "'class='box enemy col-xs-6 col-sm-3 col-md-3'>" +
+                    "<div id='" + characters[i].id + "'class='box enemy col-xs-3 col-sm-3 col-md-3'>" +
                     characters[i].name +
                     "<img class='img-responsive img-circle' src='" + characters[i].img + "'/><div class='hp'>" + characters[i].hp + "</div></div>"
                 );
@@ -150,10 +149,7 @@ $(document).ready(function () {
     //show defender
     function showDefender(defender) {
 
-        console.log('*************************');
-        console.log('showDefender();');
-        console.log('Defender var is: ' + defender);
-        console.log('*************************');
+
 
         characters.forEach(function (index) {
             if (index.id === defender) {
@@ -165,7 +161,6 @@ $(document).ready(function () {
                 );
             }
         });
-        console.log('show defender' + defender.name);
 
         //attack button
         attack(userCharacter, defender);
@@ -181,11 +176,6 @@ $(document).ready(function () {
         var defenderAttack = defender.attack;
 
         $('#attack').on('click', function () {
-            console.log('*******************************');
-            console.log('Attack defender' + defender.name);
-            console.log('*******************************');
-            console.log('defender Selected value <= 0 ::::: ' + defenderSelected);
-            console.log('defender hp: ' + defenderHp);
 
             if (userSelected && defenderSelected) {
 
@@ -193,14 +183,7 @@ $(document).ready(function () {
                 defenderHp -= userCharacter.attack;
                 userCharacter.hp -= defenderAttack;
 
-                console.log('Attack button clicked');
-                console.log('User character: ' + userCharacter.name);
-                console.log('User hp: ' + userCharacter.hp);
-                console.log('User attack: ' + userCharacter.attack)
-                console.log('Defender: ' + defender.name);
-                console.log('Defender attack: ' + defender.attack);
-                console.log('Defender hp: ' + defender.hp);
-                console.log('********************************************');
+
 
                 $('#userHp').text(userCharacter.hp);
                 $('#enemyHp').text(defenderHp);
@@ -216,7 +199,6 @@ $(document).ready(function () {
                 restart();
             } else if (defenderHp <= 0) {
 
-                console.log('defender Selected value <= 0 ::::: ' + defenderSelected);
 
                 $('#com-text').append('You have defeated ' + defender.name + '. You can choose another character to attack.');
 
