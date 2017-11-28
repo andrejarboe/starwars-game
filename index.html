@@ -8,40 +8,42 @@
     <title>Star Wars RPG</title>
 
     <link type="text/css" rel="stylesheet" href="./assets/css/reset.css" />
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link type="text/css" rel="stylesheet" href="./assets/css/style.css" />
-    
+
 </head>
 
 <body>
 
-    <section id="game">
-        <div class="container">
-            <div id="characters" class="row">
-                <h2>Choose a character </h2>
-            </div>
-            <div class="your-character" class="row">
-                <h2>Your Character</h2>
-            </div>
-            <div id="enemies" class="row">
-                
-            </div>
-            <div id="fight-section" class="row">
-                <h2>Fight Section</h2>
-                <button id="attack">Attack</button>
-            </div>
-            <div id="defender" class="row">
-                <h2>Defender</h2>
-            </div>
-            <p id="user-text">
+    <section id="game" class="container flex">
+            <h2 class="title">Choose a character </h2>
+            
+        <div id="characters" class="flex">
+            <div id="displayCharacters" class="flex">
 
-            </p>
-            <p id="com-text">
-
-            </p>
+            </div>
         </div>
+        <div class="your-character col-md-12" class="flex">
+            <h2>Your Character</h2>
+        </div>
+        <div id="enemies" class="flex">
+
+        </div>
+        <div id="fight-section" class="row">
+            <h2>Fight Section</h2>
+            <button id="attack">Attack</button>
+        </div>
+        <div id="defender" class="row">
+            <h2>Defender</h2>
+        </div>
+        <p id="user-text">
+
+        </p>
+        <p id="com-text">
+
+        </p>
     </section>
-    
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="./assets/javascript/game.js"></script>
